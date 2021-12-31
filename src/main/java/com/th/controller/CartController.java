@@ -20,7 +20,7 @@ import com.th.repository.GroceryRepository;
 import com.th.repository.UsersCartRepository;
 
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/cartcontroller")
 public class CartController {
 
 	@Autowired

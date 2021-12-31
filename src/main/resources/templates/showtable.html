@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>ADD TO TABLE</title>
+</head>
+<body>
+<div align="center">
+<h1>Grocery List</h1>
+<br/><br/>
+<table border="1" cellpadding="10">
+<thead>
+<tr>
+<th>product Name</th>
+<th>Categories</th>
+<th>Price</th>
+<th>Quantity</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="Groceries : ${li}">
+<td th:text="${Groceries.proname}"></td>
+<td th:text="${Groceries.categories}"></td>
+<td th:text="${Groceries.price}"></td>
+<td ><input type="number" placeholder="quantity in kgs" name="kgs" width="10"></td>
+
+<td>
+<!--<a th:href="@{'/edit/' + ${Groceries.proid}}">ADD to Cart </a>-->
+<a >ADD to Cart </a>
+
+
+&nbsp;&nbsp;&nbsp;
+
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>

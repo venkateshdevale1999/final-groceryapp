@@ -5,7 +5,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="grocery")
 public class Groceries {
 	
 	@Id
@@ -14,7 +13,7 @@ public class Groceries {
 	private String proname;
 	private String quantity;
 	private int price;
-	private String usebefore;
+	
 	public int getProid() {
 		return proid;
 	}
@@ -45,16 +44,11 @@ public class Groceries {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getUsebefore() {
-		return usebefore;
-	}
-	public void setUsebefore(String usebefore) {
-		this.usebefore = usebefore;
-	}
+	
 	@Override
 	public String toString() {
 		return "Groceries [proid=" + proid + ", categories=" + categories + ", proname=" + proname + ", quantity="
-				+ quantity + ", price=" + price + ", usebefore=" + usebefore + "]";
+				+ quantity + ", price=" + price + "]";
 	}
 	public Groceries(int proid, String categories, String proname, String quantity, int price, String usebefore) {
 		super();
@@ -63,7 +57,7 @@ public class Groceries {
 		this.proname = proname;
 		this.quantity = quantity;
 		this.price = price;
-		this.usebefore = usebefore;
+		
 	}
 	public Groceries() {
 		super();

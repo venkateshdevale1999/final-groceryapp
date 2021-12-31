@@ -3,22 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="logstyle.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <div class="loginbox">
-        <img src="railway.png" class="train">
-        <h2>LogIn</h2>
+    <img class="wave" src="wave.png">
+    <div class="container">
+        <div class="img">
+            <img src="bg.svg">
+        </div>
+    <div class="login-content">
         <form action="#" th:action="@{/check}" method="POST">
-            <p>Email</p>
-            <input type="email" name="useremail" placeholder="abc@gmail.com" required>
-            <p>Password</p>
-            <input type="password" name="password" placeholder="Enter Password" required>
-            <input type="submit" name="" value="LogIn" />
-            <span>or</span>
-            <a th:href = "@{/signup}" class="btn btn-primary btn-sm mb-3"> don't have account? </a>
+            <img src="avatar.svg">
+            <h2 class="title">Welcome</h2>
+            <div class="input-div one">
+                <div class="i">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="div">
+
+                    <h5>Email</h5>
+                        <input type="email" name="useremail" class="input" required>
+                </div>
+            </div>
+            <div class="input-div pass">
+                <div class="i">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <div class="div">
+                    <h5>Password</h5>
+                    <input type="password" name="password" class="input" required>
+                </div>
+            </div>
+            <input type="submit" class="btn" name="" value="LogIn" />
+<!--            <span>or</span>-->
+		<a th:href = "@{/signup}" > don't have account? </a><br>
+        <a th:href = "@{/admin}" class="class-2"> login as admin </a>
+            
         </form>
+        
     </div>
+    </div>
+    <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
