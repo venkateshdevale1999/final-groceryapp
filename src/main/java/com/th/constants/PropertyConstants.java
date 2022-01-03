@@ -9,5 +9,8 @@ package com.th.constants;
 public class PropertyConstants {
 
 	public static final String GET_ALL_GROCERY = "/getallgrocery";
+	public static final String SIGN_UP = "/signup";
+	
+	
 
 }
