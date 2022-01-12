@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.th.constants.SystemConstants;
 import com.th.model.Admin;
 import com.th.model.Groceries;
 import com.th.repository.AdminRepository;
 import com.th.repository.GroceryRepository;
+import com.th.util.ImageUtil;
 
 
 
@@ -98,13 +100,18 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public String findCategoriestable(Model model, String name) {
-		if(name.equals("fruit")) {
+		
+		model.addAttribute("imgUtil", new ImageUtil());
+		if(name.equals(SystemConstants.FRUIT)) {
 	    	List<Groceries> li = ((GroceryRepository) gr).fruittable(name);
 	    	model.addAttribute("li", li);
+	    	
+	    	
 	    }
 	    if(name.equals("vegetable")) {
 	    	List<Groceries> li = ((GroceryRepository) gr).vegetabletable(name);
 	    	model.addAttribute("li", li);
+	    	
 	    }
 	    if(name.equals("meat")) {
 	    	List<Groceries> li = ((GroceryRepository) gr).meattable(name);

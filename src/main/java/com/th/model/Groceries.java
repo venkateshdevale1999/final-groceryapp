@@ -13,7 +13,14 @@ public class Groceries {
 	private String proname;
 	private String quantity;
 	private int price;
+	private byte[] image;
 	
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 	public int getProid() {
 		return proid;
 	}
@@ -50,14 +57,15 @@ public class Groceries {
 		return "Groceries [proid=" + proid + ", categories=" + categories + ", proname=" + proname + ", quantity="
 				+ quantity + ", price=" + price + "]";
 	}
-	public Groceries(int proid, String categories, String proname, String quantity, int price, String usebefore) {
+	
+	public Groceries(int proid, String categories, String proname, String quantity, int price, byte[] image) {
 		super();
 		this.proid = proid;
 		this.categories = categories;
 		this.proname = proname;
 		this.quantity = quantity;
 		this.price = price;
-		
+		this.image = image;
 	}
 	public Groceries() {
 		super();
