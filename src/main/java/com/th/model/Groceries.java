@@ -11,7 +11,7 @@ public class Groceries {
 	private int proid;
 	private String categories;
 	private String proname;
-	private String quantity;
+	private int quantity;
 	private int price;
 	private byte[] image;
 	
@@ -39,11 +39,11 @@ public class Groceries {
 	public void setProname(String proname) {
 		this.proname = proname;
 	}
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(String quantity) {
-		this.quantity = quantity;
+	public void setQuantity(int i) {
+		this.quantity = i;
 	}
 	public int getPrice() {
 		return price;
@@ -58,7 +58,7 @@ public class Groceries {
 				+ quantity + ", price=" + price + "]";
 	}
 	
-	public Groceries(int proid, String categories, String proname, String quantity, int price, byte[] image) {
+	public Groceries(int proid, String categories, String proname, int quantity, int price, byte[] image) {
 		super();
 		this.proid = proid;
 		this.categories = categories;

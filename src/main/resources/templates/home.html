@@ -33,9 +33,10 @@
             <a href="#category">category</a>
             <a href="#contact">contact</a>
         </nav>
-
+		
         <div class="icons">
-            <a href="#" class="fas fa-shopping-cart"></a>
+        <a th:href="@{'/myorders'}" class="btn">My Orders</a>
+            <a href="#" th:href="@{'/cartShow'}" class="fas fa-shopping-cart"></a>
             <a href="#" class="fas fa-user-circle"></a>
         </div>
 

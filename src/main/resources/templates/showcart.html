@@ -2,14 +2,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8"/>
-<title>ADD TO TABLE</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Admin</title>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-    
+
     @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;600;700&display=swap');
 
 :root{
@@ -460,7 +462,7 @@ section{
 }
 
 .newsletter{
-  background:url(newsletter-bg.jpg) no-repeat;
+  background:url(../images/newsletter-bg.jpg) no-repeat;
   background-size: cover;
   background-position: center;
   text-align: center;
@@ -679,12 +681,27 @@ section{
   }
 
 }
-    
-    
+
+    #button1:hover {background-color: #ddd;}
+    #button:hover {background-color: #ddd;}
+        #cart{
+            border-collapse: collapse;
+            width: 100%;
+        }
+        #cart td, #cart th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        }
+        #cart th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size:18px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+    }
     </style>
-    
-   
-</head>
+ </head>
 <body>
 <header>
     <div class="header-1">
@@ -705,54 +722,36 @@ section{
     </div>
 </header>
 
-<section class="product" id="product">
-    <h1 class="heading">Grocery <span>List</span></h1>
-    <div class="box-container" >
-        <div class="box" th:each="Groceries : ${li}">
-            <h6 ></h6>
-            <h3 th:text="${Groceries.proname}"></h3><br>
-            <img th:src="'data:image/jpeg;base64,' + ${imgUtil.getImgData(Groceries.getImage)}"
-width="150px" 
-height="200px;">
-            
-            <h3 th:text="${Groceries.categories}"></h3>
-            
-            <div class="price">Rs:<h4 th:text="${Groceries.price}"></h4>/kg</div>
-            <a href="#" th:onclick="'javascript:addQun(' + ${Groceries.proid} + ');'">Add Quantity</a>
-            
-            <div class="quantity" th:id="${Groceries.proid}">
-             
-                
-            </div>
-            <a th:id="'an'+${Groceries.proid}" th:href="@{'/addTocart/' + ${Groceries.proid} +'/'+${Groceries.categories}+'/'}" onclick="fun()">ADD to Cart </a><br><br>
+<table id="cart" >
+<thead>
+<tr>
+<th class="tabh">Product Name</th>
+<th class="tabh">Quantity</th>
+<th class="tabh">Price</th>
+<th class="tabh">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr th:each="Groceries : ${li}">
+<td th:text="${Groceries.grocerie.proname}"></td>
 
-<a th:href="@{'/cartShow'}" >GO to Cart </a>
+<td th:text="${Groceries.quantity}"></td>
+<td th:text="${Groceries.totalprice}"></td>
+<td>
+<a th:href="@{'/editCartItem/' + ${Groceries.itemid}}" id="button1"><button type="button"> Edit </button></a>
+
+<a th:href="@{'/deleteCartItem/' + ${Groceries.itemid}}" onclick="alert('delete a item!!!')" id="button">
+<button type="button">Delete</button></a>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>total price: 
+<p th:text="${totalp}"></p></h3><br>
+<a th:href="@{'/payment/' + ${totalp}}"><button type="button">Buy Now</button></a>
 </div>
-    </div>
+
 </div>
-</section>
- <script>
- var inid;
- var anid;
-function fun(){
-	
-var a=document.getElementById(inid).value;
-var x = document.getElementById("an"+anid).href+a;
-document.getElementById("an"+anid).href=x;
-alert("added to cart");
-}
-function addQun(id){
-	
-	anid=id;
-	var container=document.getElementById(id);
-	container.appendChild(document.createTextNode("Quantity"));
-	var input=document.createElement("input");
-	input.type="Number";
-	input.id=id+"in";
-	inid=id+"in";
-	input.required=true;
-	container.appendChild(input);
-}
-</script>
 </body>
 </html>
+
