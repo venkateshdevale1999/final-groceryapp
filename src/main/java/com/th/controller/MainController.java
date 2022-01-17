@@ -159,7 +159,7 @@ public class MainController {
 	}
 
 	/**
-	 * 
+	 * this method will display the category wise products
 	 * @param model
 	 * @return
 	 */
@@ -224,125 +224,132 @@ public class MainController {
 	}
 	
 	
-	
-	@RequestMapping("/addTocart/{proid}/{procat}/{qun}")
+	/**
+	 * this will display the add to cart option in showtable
+	 * @param model contains variables to display on html page
+	 * @param proid product_id will taken from the path
+	 * @param procat category will taken from the path
+	 * @param qun quantity will taken from path
+	 * @param product product will be taken from path
+	 * @return displays the addtocart html page
+	 */
+	@RequestMapping(PropertyConstants.ADDTOCART_ID_CAT_QUN)
 	public String addTocart(Model model, @PathVariable(name="proid") int proid,@PathVariable(name="procat") String procat,@PathVariable(name="qun") int qun,@ModelAttribute("li") Groceries product) {
 
-	Userscartitems1 u=new Userscartitems1();
-	u.setQuantity(qun);
-	int price=gr.getproRec(proid).getPrice();
-
-	u.setTotalprice(price*qun);
-	u.setGroceries(gr.getproRec(proid));
-	u.setUser(ur.getUesrRec(emailid));
-
-	uc.save(u);
-
-	return "redirect:/addtocarttable/"+procat;
+		String addtocart = userservice.addTocart(model, proid, procat, qun, product);
+		return addtocart;
 	}
 
 
 
-	@RequestMapping("/cartShow")
+	/**
+	 * this method will user cart product which choose before
+	 * @param model contains the information about products selected
+	 * @return
+	 */
+	@RequestMapping(PropertyConstants.CART_SHOW)
 	public String showCart(Model model) {
-	List<Userscartitems1> li=uc.findByUseremail(emailid);
-	System.out.println(li);
-	int totalp=0;
-	for(Userscartitems1 u:li) {
-	totalp += u.getTotalprice();
-	}
-	System.out.println(totalp);
-	model.addAttribute("totalp",totalp);
-	model.addAttribute("li",li);
-	return "showcart";
+		String showcart = userservice.showCart(model);
+		return showcart;
 	}
 
 
 
-	@RequestMapping("/editCartItem/{itemid}")
+	/**
+	 * this method is for editing of existing product in user cart table 
+	 * @param itemid product id to edit in back-end
+	 * @param model contains information to display on html page
+	 * @return display edit product page
+	 */
+	@RequestMapping(PropertyConstants.EDIT_CART_ID)
 	public String editCartItem(@PathVariable(name="itemid") int itemid,Model model) {
 
-	Userscartitems1 item = uc.findById(itemid).get();
-	model.addAttribute("item", item);
-
-
-
-	return "edit_cartitem";
+		String edit_cartitem = userservice.editCartItem(itemid, model);
+		return edit_cartitem;
 	}
-	@RequestMapping("/saveCart")
+	
+	/**
+	 * this methis is to save the edit product to the back-end table
+	 * @param item object of the usercarttable
+	 * @return save cart page will be display
+	 */
+	@RequestMapping(PropertyConstants.SAVE_CART)
 	public String saveCart(@ModelAttribute("Userscartitems1") Userscartitems1 item) {
-	Userscartitems1 itemlist = uc.findById(item.getItemid()).get();
-	System.out.println(itemlist);
-	int q=item.getQuantity();
-	int p=itemlist.grocerie.getPrice();
-	itemlist.setQuantity(item.getQuantity());
-	itemlist.setTotalprice(q*p);
-
-	uc.save(itemlist);
-	return "redirect:/cartShow";
+	
+		String savecart = userservice.saveCart(item);
+		return savecart;
 
 	}
-	@RequestMapping("/deleteCartItem/{id}")
+	
+	/**
+	 * this method will display the cart after deleting the product from table
+	 * @param id takes the id from front-end html page 
+	 * @return displays the cart
+	 */
+	@RequestMapping(PropertyConstants.DELETE_CART_ID)
 	public String deleteCartItem(@PathVariable(name = "id") int id) {
-	uc.deleteById(id);
-	return "redirect:/cartShow";
+	
+		String deletecartitem = userservice.deleteCartItem(id);
+		return deletecartitem;
 	}
-	@RequestMapping("/payment/{price}")
+	
+	/**
+	 * this method will take the control to payment page after clicking buynow button
+	 * @param price price will taken to next page
+	 * @param model
+	 * @return displays the payment page
+	 */
+	@RequestMapping(PropertyConstants.PAYMENT_PRICE)
 	public String goToPayment(@PathVariable(name = "price") int price ,Model model) {
-	model.addAttribute("price", price);
-	return "payment";
+	
+		
+		String paymentpage = userservice.goToPayment(price, model);
+		return paymentpage;
 	}
-	@RequestMapping("/saveorder/{price}/{address}")
+	
+	
+	/**
+	 * this method will go to confirmation page after payment
+	 * @param price this will take the price from path
+	 * @param model
+	 * @param address this will taken from path
+	 * @return
+	 */
+	@RequestMapping(PropertyConstants.SAVEORDER_PRICE_ADDRESS)
 	public String finalPay(@PathVariable(name = "price") int price ,Model model,@PathVariable("address") String address) {
 
-	MyOrder myOrder=new MyOrder();
-	Random random = new Random();
-	myOrder.setPiadamount(price);
-	myOrder.setAddress(address);
-	myOrder.setOrderdate(new Date());
-	myOrder.setOrderid("OID"+random.nextInt(1000));
-	myOrder.setUseremail(emailid);
-	System.out.println(myOrder.toString());
-	mo.save(myOrder);
-
-	List<Userscartitems1> li=uc.findByUseremail(emailid);
-	for(Userscartitems1 u1:li) {
-	System.out.println(u1.getQuantity()+" "+u1.getGroceries().getQuantity());
-	u1.getGroceries().setQuantity(u1.getGroceries().getQuantity()-u1.getQuantity());
-	System.out.println("after"+u1.getQuantity()+" "+u1.getGroceries().getQuantity());
-	uc.save(u1);
-	}
-	for(Userscartitems1 u1:li) {
-		uc.deleteById(u1.getItemid());
-	}
-	System.out.println(emailid);
 	
-	
-	model.addAttribute("oid", myOrder.getOrderid());
-	return "success";
+		String finalpay = userservice.finalPay(price, model, address);
+		return finalpay;
 	}
 	
-	@RequestMapping("/homereplay")
+	/**
+	 * this method directs to home page
+	 * @return 
+	 */
+	@RequestMapping(PropertyConstants.HOME_REDIRECT)
 	public String replayhome() {
+		
 		return "home";
 		
 		
 	}
 	
-	@RequestMapping(value ="/savenoimg" , method = RequestMethod.POST)
+	@RequestMapping(value =PropertyConstants.SAVE_NOIMG , method = RequestMethod.POST)
 	public String saveProductnoimg(@ModelAttribute("grocery") Groceries grocery) {
 
 		
-		gr.save(grocery);
-		return "redirect:/adminlogin1";
+		String savenoimg = userservice.saveProductnoimg(grocery);
+		return savenoimg;
 
 	}
 	
-	@RequestMapping("/myorders")
+	@RequestMapping(PropertyConstants.MY_ORDER)
 	public String showMyorders(Model model) {
-	List<MyOrder> li=mo.getMyOrderByEmail(emailid);
-	model.addAttribute("li",li);
-	return "myorders";
+	
+		
+		String myorder = userservice.showMyorders(model);
+		return myorder;
 	}
 
 }
