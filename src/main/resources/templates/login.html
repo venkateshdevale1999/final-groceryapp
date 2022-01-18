@@ -5,10 +5,24 @@
     <title>login</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="logstyle.css">
+    <link rel="icon" href="basket-shop.png"/>
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
+<div class="alert alert-danger" role="alert" th:if="${error}">
+<script>
+swal.fire("Invalid Password","","error");
+</script>
+</div>
+
+<div class="alert alert-danger" role="alert" th:if="${error1}">
+<script>
+swal.fire("Invalid Email Address","","error");
+</script>
+</div>
+
     <img class="wave" src="wave.png">
     <div class="container">
         <div class="img">

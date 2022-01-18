@@ -1,5 +1,11 @@
 package com.th.controller;
 
+import java.io.IOException;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.th.constants.PropertyConstants;
 import com.th.model.Admin;
@@ -21,15 +28,6 @@ import com.th.repository.UsersCartRepository;
 import com.th.repository.UsersRepository;
 import com.th.service.AdminService;
 import com.th.service.UserService;
-
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 
 /**
  * 
@@ -75,6 +73,13 @@ public class MainController {
 	 * @return returns the login.html page
 	 */
 	@RequestMapping("/")
+	public String Indexpage() {
+
+		String startpage = userservice.Indexpage();
+		return startpage;
+	}
+	
+	@RequestMapping("/login")
 	public String Loginpage() {
 
 		String loginpage = userservice.Loginpage();
@@ -101,9 +106,9 @@ public class MainController {
 	 * @return redirect backs to loginpage for login again
 	 */
 	@PostMapping(PropertyConstants.SAVE_USER)
-	public String saveUser(@ModelAttribute("user") Users user) {
+	public String saveUser(@ModelAttribute("user") Users user, RedirectAttributes redirAttrs) {
 
-		String loginpage = userservice.saveUser(user);
+		String loginpage = userservice.saveUser(user, redirAttrs);
 		return loginpage;
 	}
 
@@ -113,10 +118,10 @@ public class MainController {
 	 * @return after validation return home page orlese invalid page
 	 */
 	@PostMapping(PropertyConstants.CHECK)
-	public String auth(@ModelAttribute("user") Users u) {
+	public String auth(@ModelAttribute("user") Users u, RedirectAttributes redirAttrs) {
 		emailid=u.getUseremail();
 
-		String homepage = userservice.auth(u);
+		String homepage = userservice.auth(u, redirAttrs);
 		return homepage;
 
 	}
@@ -138,8 +143,8 @@ public class MainController {
 	 * @return page which has the option for CRUD for admin
 	 */
 	@PostMapping(PropertyConstants.ADMIN_LOGIN)
-	public String adminlogincheck(@ModelAttribute("admin") Admin admin, Model model) {
-		String adminlogin = adminservice.adminlogincheck(admin, model);
+	public String adminlogincheck(@ModelAttribute("admin") Admin admin, Model model, RedirectAttributes redirAttrs) {
+		String adminlogin = adminservice.adminlogincheck(admin, model, redirAttrs);
 		return adminlogin;
 
 	}
@@ -351,5 +356,13 @@ public class MainController {
 		String myorder = userservice.showMyorders(model);
 		return myorder;
 	}
+	
+	@RequestMapping("/userorders")
+	public String userOrders(Model model) {
+		List<MyOrder> list=mo.findAll();
+		model.addAttribute("list", list);
+		return "userorders";
+	}
+	
 
 }

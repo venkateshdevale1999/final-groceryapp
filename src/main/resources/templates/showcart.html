@@ -7,6 +7,7 @@ xmlns:th="http://www.thymeleaf.org">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Admin</title>
 <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+	<link rel="icon" href="basket-shop.png"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- custom css file link  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -686,17 +687,22 @@ section{
     #button:hover {background-color: #ddd;}
         #cart{
             border-collapse: collapse;
-            width: 100%;
+            width: 80%;
+            
         }
+        #cart td{
+			font-size:15px;
+			
+		}
         #cart td, #cart th {
         border: 1px solid #ddd;
         padding: 8px;
+        text-align:center;
         }
         #cart th {
   padding-top: 12px;
   padding-bottom: 12px;
-  font-size:18px;
-  text-align: left;
+  font-size:20px;
   background-color: #04AA6D;
   color: white;
     }
@@ -705,28 +711,22 @@ section{
 <body>
 <header>
     <div class="header-1">
-        <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>grocery store</a>
+        <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>Your Cart</a>
     </div>
     <div class="header-2">
         <div id="menu-bar" class="fas fa-bars"></div>
         <nav class="navbar">
             <a th:href="@{/homereplay}">home</a>
-            <a href="#category">category</a>
-            <a href="#contact">contact</a>
         </nav>
 
-        <div class="icons">
-            <a href="#" class="fas fa-shopping-cart"></a>
-            <a href="#" class="fas fa-user-circle"></a>
-        </div>
     </div>
 </header>
-
-<table id="cart" >
+<center>
+<table id="cart">
 <thead>
 <tr>
 <th class="tabh">Product Name</th>
-<th class="tabh">Quantity</th>
+<th class="tabh">Quantity (Kg/ltr)</th>
 <th class="tabh">Price</th>
 <th class="tabh">Actions</th>
 </tr>
@@ -746,11 +746,11 @@ section{
 </tr>
 </tbody>
 </table>
-<h3>total price: 
-<p th:text="${totalp}"></p></h3><br>
+</center>
+<div style="margin-left:767px; display:inline-block;">
+<h3 >total price: 
+<p th:text="${totalp}" style="display:inline-block;"></p>&nbsp;<span class="fas fa-rupee"></span></h3><br>
 <a th:href="@{'/payment/' + ${totalp}}"><button type="button">Buy Now</button></a>
-</div>
-
 </div>
 </body>
 </html>

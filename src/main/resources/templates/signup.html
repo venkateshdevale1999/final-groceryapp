@@ -4,21 +4,45 @@
 <meta charset="ISO-8859-1">
 <title>user signup</title>
     <link rel="stylesheet" type="text/css" href="logstyle1.css">
+    <link rel="icon" href="basket-shop.png"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 </head>
 <body>
+<div class="alert alert-danger" role="alert" th:if="${success}">
+<script>
+Swal.fire({
+            title: 'User added successfully',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Login'
+        }).then(result => {
+            if (result.value) {
+                document.location='/login';
+            }
+        })
+</script>
+</div>
+
+<div class="alert alert-danger" role="alert" th:if="${error}">
+<script>
+swal.fire("User already exist!","Try to login","warning");
+</script>
+</div>
+
 <div class="container">
 <h1>SIGNUP PAGE</h1>
 <h3>User Info</h3>
     <form action="#" th:action="@{/saveuser}" method="POST">
         <p>Email</p>
-        <input type="text" name=useremail placeholder="Enter emailId" class="form-control mb-4 col-4">
+        <input type="text" name=useremail placeholder="Enter emailId" class="form-control mb-4 col-4" required>
         <p>Password</p>
-<input type="text" name=password placeholder="Enter password" class="form-control mb-4 col-4">
+<input type="text" name=password placeholder="Enter password" class="form-control mb-4 col-4" required>
         <p>Phone no</p>
-<input type="number" name=phoneno placeholder="Enter phone number" class="form-control mb-4 col-4">
-<button type="submit" class="btn btn-info col-2"> signup</button><br>
-        <a th:href = "@{/}">already have account?</a>
+<input type="number" name=phoneno placeholder="Enter phone number" class="form-control mb-4 col-4" required>
+<button type="submit" id="singnupbt" class="btn btn-info col-2"> signup</button><br>
+        <a th:href = "@{/login}">already have account?</a>
         </form>
 </div>
 </body>

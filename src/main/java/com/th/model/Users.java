@@ -15,7 +15,7 @@ public class Users {
 	@Id
 	private String useremail;
 	private String password;
-	private int phoneno;
+	private long phoneno;
 	
 	
 	public int getUserid() {
@@ -38,10 +38,10 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getPhoneno() {
+	public long getPhoneno() {
 		return phoneno;
 	}
-	public void setPhoneno(int phoneno) {
+	public void setPhoneno(long phoneno) {
 		this.phoneno = phoneno;
 	}
 	

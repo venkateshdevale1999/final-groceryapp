@@ -10,6 +10,7 @@ xmlns:th="http://www.thymeleaf.org">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="basket-shop.png"/>
 
     <style>
         td{
@@ -489,16 +490,16 @@ tr td:last-child {
                     <span>Add and delete Products</span></a>
             </li>
             <li>
-                <a href="edit_product.html"><span class="fas fa-user-check"></span>
-                    <span>Edit Product</span></a>
-            </li>
-            <li>
                 <a href=""><span class="las la-user"></span>
                     <span>Change password</span></a>
             </li>
             <li>
-                <a href=""><span class="fa fa-sign-out"></span>
+                <a th:href = "@{/admin}"><span class="fa fa-sign-out"></span>
                     <span>Log out</span></a>
+            </li>
+            <li>
+                <a th:href = "@{/login}"><span class="fas fa-home"></span>
+                    <span>Home Page</span></a>
             </li>
         </ul>
     </div>
@@ -525,7 +526,14 @@ tr td:last-child {
 </tr>
 <tr>
 <td>Category </td>
-<td><input type="text" name="categories" /></td>
+<td>
+<select name="categories">
+<option>fruit</option>
+<option>vegetable</option>
+<option>meat</option>
+<option>dailyneeds</option>
+</select>
+</td>
 </tr>
 <td>Product Name</td>
 <td><input type="text" name="proname" /></td>

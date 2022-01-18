@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.th.model.Groceries;
 import com.th.model.MyOrder;
@@ -23,7 +24,6 @@ import com.th.repository.UsersRepository;
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{
-	
 	
 	@Autowired
 	UsersRepository ur;
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService{
 	String emailid;
 
 	@Override
-	public String auth(Users u) {
+	public String auth(Users u, RedirectAttributes redirAttrs) {
 		Optional<Users> searchUser = ur.findById(u.getUseremail());
 		if(searchUser.isPresent()) 
 		{
@@ -49,11 +49,14 @@ public class UserServiceImpl implements UserService{
 			if(u.getPassword().equals(u1.getPassword()))
 				return "home";
 			 
-			return "invalid";
+			redirAttrs.addFlashAttribute("error", "The");
+			return "redirect:/login";
 
 		}
-		else
-		  return "invalid";
+		else {
+			redirAttrs.addFlashAttribute("error1", "The");
+			return "redirect:/login";
+		}
 
 	}
 
@@ -69,9 +72,19 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public String saveUser(Users user) {
-		ur.save(user);
-		return "login";
+	public String saveUser(Users user, RedirectAttributes redirAttrs) {
+		Optional<Users> u=ur.findById(user.getUseremail());
+		if(u.isEmpty()) {
+			ur.save(user);
+			redirAttrs.addFlashAttribute("success", "The");
+			return "redirect:/signup";
+			
+		}
+		else {
+			redirAttrs.addFlashAttribute("error", "The");
+			return "redirect:/signup";
+		}
+		
 	}
 
 	@Override
@@ -180,6 +193,11 @@ public class UserServiceImpl implements UserService{
 		List<MyOrder> li=mo.getMyOrderByEmail(emailid);
 		model.addAttribute("li",li);
 		return "myorders";
+	}
+
+	@Override
+	public String Indexpage() {
+		return "splash";
 	}
 
 	

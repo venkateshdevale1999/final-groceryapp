@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.th.constants.SystemConstants;
 import com.th.model.Admin;
@@ -39,7 +40,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public String adminlogincheck(Admin a, Model model) {
+	public String adminlogincheck(Admin a, Model model, RedirectAttributes redirAttrs) {
 		Optional<Admin> searchUser = ar.findById(a.getAdminid());
 		
 		if(searchUser.isPresent()) 
@@ -54,11 +55,14 @@ public class AdminServiceImpl implements AdminService {
 				
 			}
 			 
-			return "invalid";
+			redirAttrs.addFlashAttribute("error", "The");
+			return "redirect:/admin";
 
 		}
-		else
-		  return "invalid1";
+		else {
+			redirAttrs.addFlashAttribute("error1", "The");
+			return "redirect:/admin";
+		}
 	}
 
 	@Override

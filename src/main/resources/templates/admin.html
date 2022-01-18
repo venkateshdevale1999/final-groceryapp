@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
-    
+    <link rel="icon" href="basket-shop.png"/>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Abril+Fatface|Poppins">
 	<style>
 	@import url("//fonts.googleapis.com/css?family=Pacifico&text=Pure");
@@ -215,8 +215,20 @@ background:#2ecc71;
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
+<!--<i class="fa fa-spinner fa-pulse"></i>-->
+<div class="alert alert-danger" role="alert" th:if="${error}">
+<script>
+swal.fire("Invalid Password!","","error");
+</script>
+</div>
+<div class="alert alert-danger" role="alert" th:if="${error1}">
+<script>
+swal.fire("Invalid AdminId!","","error");
+</script>
+</div>
 <div class="box">
         <form action="#" th:action="@{/adminlogin}" method="POST">    
             <input type="text" name="adminid" placeholder="Enter Admin Id" required>
