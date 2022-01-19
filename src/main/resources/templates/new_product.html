@@ -44,7 +44,7 @@ xmlns:th="http://www.thymeleaf.org">
     
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 :root {
-    --main-color: #1f8fc3;
+    --main-color: radial-gradient(circle, #0077ea, #1f4f96, #1b2949, #000);;
     --color-dark: #1D2231;
     --text-grey: #8390A2;
 }
@@ -472,10 +472,19 @@ tr td:last-child {
     }
 }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
-
-
+<div class="alert alert-danger" role="alert" th:if="${error}">
+<script>
+swal.fire({
+	title:"Item exist with this Prod Id",
+	text:"Try with another Id",
+	icon:"warning",
+	timer:3000
+	});
+</script>
+</div>
 
 <input type="checkbox" id="nav-toggle">
 <div class="sidebar">
@@ -488,10 +497,6 @@ tr td:last-child {
             <li>
                 <a href="" class="active"><span class="fas fa-user-edit"></span>
                     <span>Add and delete Products</span></a>
-            </li>
-            <li>
-                <a href=""><span class="las la-user"></span>
-                    <span>Change password</span></a>
             </li>
             <li>
                 <a th:href = "@{/admin}"><span class="fa fa-sign-out"></span>
@@ -512,22 +517,23 @@ tr td:last-child {
                 <span class="las la-bars"></span>
             </label> Add
         </h2>
+        <a th:href = "@{/adminlogin1}"><i class='far fa-hand-point-left' style='font-size:40px;'></i></a>
     </header>
 </div>
 
 <div align="center">
-<h1>Create New item</h1>
-<br />
+<br /><br /><br /><br />
 <form action="#" th:action="@{/save}" th:object="${Groceries}" method="post"  enctype="multipart/form-data">
 <table border="0" cellpadding="10">
 <tr>
 <td>Product ID:</td>
-<td><input type="text" name="proid" /></td>
+<td><input type="text" name="proid" required/></td>
 </tr>
 <tr>
 <td>Category </td>
 <td>
-<select name="categories">
+<select name="categories" required style="width:100%; height:38%">
+<option>Select category</option>
 <option>fruit</option>
 <option>vegetable</option>
 <option>meat</option>
@@ -536,21 +542,21 @@ tr td:last-child {
 </td>
 </tr>
 <td>Product Name</td>
-<td><input type="text" name="proname" /></td>
+<td><input type="text" name="proname" required/></td>
 </tr>
 <tr>
 <td>Quantity</td>
-<td><input type="text" name="quantity"  /></td>
+<td><input type="text" name="quantity"  required/></td>
 </tr>
 <tr>
 <td>Price:</td>
-<td><input type="text" name="price" /></td>
+<td><input type="text" name="price" required/></td>
 </tr>
 </table>
 <label>Photos: </label>
-<input type="file" name="img" accept="image/png, image/jpeg" onchange="previewFile()">
-<img id="previewImage" src="./img/default.jpg" height="50" alt="Image preview...">
-<button type="submit">Save</button>
+<input type="file" name="img" accept="image/png, image/jpeg" onchange="previewFile()" required>
+<img id="previewImage" src="./img/default.jpg" height="50" alt=" Image preview...">
+<button type="submit">Add</button>
 </form>
 </div>
 

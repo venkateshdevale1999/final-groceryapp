@@ -685,19 +685,24 @@ section{
 
     #button1:hover {background-color: #ddd;}
     #button:hover {background-color: #ddd;}
-        #cart{
+       #cart{
             border-collapse: collapse;
-            width: 100%;
+            width: 80%;
+            
         }
+        #cart td{
+			font-size:15px;
+			
+		}
         #cart td, #cart th {
         border: 1px solid #ddd;
         padding: 8px;
+        text-align:center;
         }
         #cart th {
   padding-top: 12px;
   padding-bottom: 12px;
-  font-size:18px;
-  text-align: left;
+  font-size:20px;
   background-color: #04AA6D;
   color: white;
     }
@@ -717,14 +722,14 @@ section{
        
     </div>
 </header>
-
+<center>
 <table id="cart" >
 <thead>
 <tr>
-<th class="tabh">OrderId</th>
-<th class="tabh">Dilevry Address</th>
-<th class="tabh">Amount Piad</th>
-<th class="tabh">Date</th>
+<th class="tabh">Order Id</th>
+<th class="tabh">Delivery Address</th>
+<th class="tabh">Amount Paid</th>
+<th class="tabh">Date & Time</th>
 </tr>
 </thead>
 <tbody>
@@ -739,7 +744,7 @@ section{
 </tr>
 </tbody>
 </table>
-
+</center>
 </div>
 
 </div>

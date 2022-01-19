@@ -16,7 +16,7 @@ public interface UserService {
 	public String Loginpage();
 	public String Indexpage();
 	public String saveUser(@ModelAttribute("user") Users user, RedirectAttributes redirAttrs);
-	public String addTocart(Model model, @PathVariable(name="proid") int proid,@PathVariable(name="procat") String procat,@PathVariable(name="qun") int qun,@ModelAttribute("li") Groceries product);
+	public String addTocart(Model model, @PathVariable(name="proid") int proid,@PathVariable(name="procat") String procat,@PathVariable(name="qun") int qun,@ModelAttribute("li") Groceries product, RedirectAttributes redirAttrs, String email);
 	public String showCart(Model model);
 	public String editCartItem(@PathVariable(name="itemid") int itemid,Model model);
 	public String saveCart(@ModelAttribute("Userscartitems1") Userscartitems1 item);

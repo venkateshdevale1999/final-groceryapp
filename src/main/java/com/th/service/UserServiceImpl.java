@@ -88,18 +88,25 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public String addTocart(Model model, int proid, String procat, int qun, Groceries product) {
-		Userscartitems1 u=new Userscartitems1();
-		u.setQuantity(qun);
-		int price=gr.getproRec(proid).getPrice();
+	public String addTocart(Model model, int proid, String procat, int qun, Groceries product, RedirectAttributes redirAttrs, String email) {
+		List<Userscartitems1> opt=uc.findByProid(proid, email);
+		if(opt.isEmpty()) {
+			Userscartitems1 u=new Userscartitems1();
+			u.setQuantity(qun);
+			int price=gr.getproRec(proid).getPrice();
 
-		u.setTotalprice(price*qun);
-		u.setGroceries(gr.getproRec(proid));
-		u.setUser(ur.getUesrRec(emailid));
+			u.setTotalprice(price*qun);
+			u.setGroceries(gr.getproRec(proid));
+			u.setUser(ur.getUesrRec(emailid));
 
-		uc.save(u);
-
-		return "redirect:/addtocarttable/"+procat;
+			uc.save(u);
+			redirAttrs.addFlashAttribute("success", "s");
+			return "redirect:/addtocarttable/"+procat;
+		}
+		else {
+			redirAttrs.addFlashAttribute("error", "e");
+			return "redirect:/addtocarttable/"+procat;
+		}
 	}
 
 	@Override

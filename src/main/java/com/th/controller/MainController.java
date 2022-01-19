@@ -118,9 +118,9 @@ public class MainController {
 	 * @return after validation return home page orlese invalid page
 	 */
 	@PostMapping(PropertyConstants.CHECK)
-	public String auth(@ModelAttribute("user") Users u, RedirectAttributes redirAttrs) {
+	public String auth(@ModelAttribute("user") Users u, RedirectAttributes redirAttrs, Model model) {
 		emailid=u.getUseremail();
-
+		model.addAttribute("emailid",emailid);
 		String homepage = userservice.auth(u, redirAttrs);
 		return homepage;
 
@@ -183,10 +183,10 @@ public class MainController {
 	 * @return returns saveproduct.html page
 	 */
 	@RequestMapping(value =PropertyConstants.SAVE , method = RequestMethod.POST)
-	public String saveProduct(@ModelAttribute("grocery") Groceries grocery,@RequestParam("img") MultipartFile file)throws IOException {
+	public String saveProduct(@ModelAttribute("grocery") Groceries grocery,@RequestParam("img") MultipartFile file, RedirectAttributes redirAttrs)throws IOException {
 
 		grocery.setImage(file.getBytes());
-		String saveproduct = adminservice.saveProduct(grocery);
+		String saveproduct = adminservice.saveProduct(grocery, redirAttrs);
 		return saveproduct;
 
 	}
@@ -239,9 +239,9 @@ public class MainController {
 	 * @return displays the addtocart html page
 	 */
 	@RequestMapping(PropertyConstants.ADDTOCART_ID_CAT_QUN)
-	public String addTocart(Model model, @PathVariable(name="proid") int proid,@PathVariable(name="procat") String procat,@PathVariable(name="qun") int qun,@ModelAttribute("li") Groceries product) {
+	public String addTocart(Model model, @PathVariable(name="proid") int proid,@PathVariable(name="procat") String procat,@PathVariable(name="qun") int qun,@ModelAttribute("li") Groceries product, RedirectAttributes redirAttrs) {
 
-		String addtocart = userservice.addTocart(model, proid, procat, qun, product);
+		String addtocart = userservice.addTocart(model, proid, procat, qun, product, redirAttrs, emailid);
 		return addtocart;
 	}
 
@@ -333,8 +333,8 @@ public class MainController {
 	 * @return 
 	 */
 	@RequestMapping(PropertyConstants.HOME_REDIRECT)
-	public String replayhome() {
-		
+	public String replayhome(Model model) {
+		model.addAttribute("emailid", emailid);
 		return "home";
 		
 		

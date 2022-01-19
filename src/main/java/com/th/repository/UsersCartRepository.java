@@ -30,6 +30,7 @@ List<Userscartitems1> findByUseremail(@Param("email") String email);
 @Query(value = "delete from userscartitems1 where useremail=:email", nativeQuery = true)
 void deletecart(@Param("email") String email);
 
-
+@Query(value = "select * from userscartitems1 where proid=:proid and useremail=:email", nativeQuery = true)
+List<Userscartitems1> findByProid(@Param("proid") int proid, @Param("email") String email);
 
 }

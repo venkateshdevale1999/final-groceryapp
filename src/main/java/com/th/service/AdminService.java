@@ -15,7 +15,7 @@ public interface AdminService {
 	public String adminlogincheck (@ModelAttribute("admin") Admin a, Model model, RedirectAttributes redirAttrs);
 	public String redisplay(Model model);
 	public String showNewProductPage(Model model);
-	public String saveProduct(@ModelAttribute("product") Groceries product);
+	public String saveProduct(@ModelAttribute("product") Groceries product, RedirectAttributes redirAttrs);
 	public String deleteProduct(@PathVariable(name = "id") int id);
 	public ModelAndView showEditProductPage(@PathVariable(name = "id") int id);
 	public String findCategoriestable(Model model, @PathVariable(name="name") String name);

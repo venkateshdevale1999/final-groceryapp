@@ -506,6 +506,7 @@ tr td:last-child {
                     <span class="las la-bars"></span>
                 </label> Edit
             </h2>
+            <a th:href = "@{/adminlogin1}"><i class='far fa-hand-point-left' style='font-size:40px;'></i></a>
         </header>
     </div>
 
@@ -531,13 +532,13 @@ tr td:last-child {
                 <tr>
                     <td class="labels">category</td>
                     <td>
-                        <input type="text" name="categories" th:value="${item.categories}"/>
+                        <input type="text" name="categories" th:value="${item.categories}" readonly/>
                     </td>
                 </tr>
                 <tr>
                     <td class="labels">Product Name </td>
                     <td>
-                        <input type="text" name="proname" th:value="${item.proname}"/>
+                        <input type="text" name="proname" th:value="${item.proname}" readonly />
                     </td>
                 </tr>
                 <tr>

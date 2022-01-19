@@ -67,6 +67,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public String redisplay(Model model) {
+		model.addAttribute("imgUtil", new ImageUtil());
 		List<Groceries> lg = gr.findAll();
 		model.addAttribute("lg",lg);
 		return "admincrud";
@@ -76,15 +77,22 @@ public class AdminServiceImpl implements AdminService {
 	public String showNewProductPage(Model model) {
 		Groceries item = new Groceries();
 		model.addAttribute("product", item);
-
+		
 		return "new_product";
 	}
 
 	@Override
-	public String saveProduct(Groceries product) {
-		gr.save(product);
-
-		return "redirect:/adminlogin1";
+	public String saveProduct(Groceries product, RedirectAttributes redirAttrs) {
+		Optional<Groceries> list=gr.findById(product.getProid());
+		if(list.isEmpty()) {
+			gr.save(product);
+			return "redirect:/adminlogin1";
+		}
+		else {
+			redirAttrs.addFlashAttribute("error", "e");
+			return "redirect:/new";
+		}		
+		
 	}
 
 	@Override

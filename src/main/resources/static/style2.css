@@ -140,7 +140,7 @@ section{
 .header-2 .icons a{
   font-size: 2.5rem;
   color:var(--black);
-  padding-left: 1rem;
+  padding-left: 0.5rem;
 }
 
 .header-2 .icons a:hover{

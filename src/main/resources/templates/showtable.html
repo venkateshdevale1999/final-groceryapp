@@ -681,33 +681,99 @@ section{
 
 }
     
-    
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+.show {display: block;}
+
     </style>
     
-   
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
+
+<script>
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('#dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+</script>
+
+<div class="alert alert-danger" role="alert" th:if="${error}">
+<script>
+swal.fire("Item already exist in your cart!","If you want to edit go to cart","info");
+</script>
+</div>
+<div class="alert alert-danger" role="alert" th:if="${success}">
+<script>
+swal.fire("Item added to cart","","success");
+</script>
+</div>
+
 <header>
     <div class="header-1">
-        <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>grocery store</a>
+        <a href="#" class="logo"><i class="fas fa-shopping-basket"></i><h2 class="heading" style="display:inline-block">Grocery <span>List</span></h2></a>
     </div>
     <div class="header-2">
         <div id="menu-bar" class="fas fa-bars"></div>
         <nav class="navbar">
             <a th:href="@{/homereplay}">home</a>
-            <a href="#category">category</a>
-            <a href="#contact">contact</a>
         </nav>
 
         <div class="icons">
-            <a href="#" class="fas fa-shopping-cart"></a>
-            <a href="#" class="fas fa-user-circle"></a>
+        	
+            <a href="#" th:href="@{'/cartShow'}" class="fas fa-shopping-cart"></a>
+            <div class="dropdown">
+  <a onclick="myFunction()" id="dropbtn" class="fas fa-user-circle"></a>
+  <div id="myDropdown" class="dropdown-content">
+    <a th:text="${emailid}"></a>
+    <a th:href="@{'/myorders'}">My Orders</a>
+    <a th:href="@{/login}">Logout</a>
+  </div>
+</div>
+            
         </div>
     </div>
 </header>
 
 <section class="product" id="product">
-    <h1 class="heading">Grocery <span>List</span></h1>
+    
     <div class="box-container" >
         <div class="box" th:each="Groceries : ${li}">
             <h6 ></h6>
@@ -719,15 +785,13 @@ height="200px;">
             <h3 th:text="${Groceries.categories}"></h3>
             
             <div class="price">Rs: <h4 style="display:inline-block" th:text="${Groceries.price}"></h4> /kg</div>
-            <a href="#" th:onclick="'javascript:addQun(' + ${Groceries.proid} + ');'">Add Quantity</a>
+            <a href="#" id="qnt" th:onclick="'javascript:addQun(' + ${Groceries.proid} + ');'" style="font-size:large">Add Quantity</a>
             
             <div class="quantity" th:id="${Groceries.proid}">
              
-                
             </div>
-            <a th:id="'an'+${Groceries.proid}" th:href="@{'/addTocart/' + ${Groceries.proid} +'/'+${Groceries.categories}+'/'}" onclick="fun()">ADD to Cart </a><br><br>
+            <a hidden style="font-size:large;" th:id="'an'+${Groceries.proid}" th:href="@{'/addTocart/' + ${Groceries.proid} +'/'+${Groceries.categories}+'/'}" onclick="fun()" >ADD to Cart </a><br><br>
 
-<a th:href="@{'/cartShow'}" >GO to Cart </a>
 </div>
     </div>
 </div>
@@ -738,12 +802,26 @@ height="200px;">
 function fun(){
 	
 var a=document.getElementById(inid).value;
-var x = document.getElementById("an"+anid).href+a;
-document.getElementById("an"+anid).href=x;
-alert("added to cart");
+var actual= document.getElementById("an"+anid).href;
+if(a>0){
+	document.getElementById("an"+anid).href="";
+	var x = actual+a;
+	document.getElementById("an"+anid).href=x;
 }
+else{
+	if(a!=''){
+		alert("add a valid quantity!");
+		document.getElementById("an"+anid).href='';
+	}
+	else{
+		alert("add a quantity!");
+		document.getElementById("an"+anid).href='';
+	}
+}
+
+}
+
 function addQun(id){
-	
 	anid=id;
 	var container=document.getElementById(id);
 	container.appendChild(document.createTextNode("Quantity"));
@@ -751,8 +829,9 @@ function addQun(id){
 	input.type="Number";
 	input.id=id+"in";
 	inid=id+"in";
-	input.required=true;
 	container.appendChild(input);
+	document.getElementById("an"+anid).hidden=false;
+	document.getElementById("qnt").onclick="";
 }
 </script>
 </body>

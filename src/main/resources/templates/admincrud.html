@@ -11,7 +11,7 @@ xmlns:th="http://www.thymeleaf.org">
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
         <link rel="stylesheet" href="css/style.css">
 		<link rel="icon" href="basket-shop.png"/>
-		
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <style>
             h1{
         text-align: center;
@@ -65,7 +65,7 @@ xmlns:th="http://www.thymeleaf.org">
         }
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 :root {
-    --main-color: #1f8fc3;
+    --main-color:radial-gradient(circle, #0077ea, #1f4f96, #1b2949, #000);
     --color-dark: #1D2231;
     --text-grey: #8390A2;
 }
@@ -498,6 +498,8 @@ tr td:last-child {
     </head>
 
 <body>
+
+
 <input type="checkbox" id="nav-toggle">
 <div class="sidebar">
     <div class="sidebar-brand">
@@ -539,12 +541,12 @@ tr td:last-child {
     <br>
     <br>
 <div align="center" class="header_fixed">
-    <h1>Grocery List</h1>
-    <a th:href="@{/new}">Create New Product</a>
+    <br /><br /><br />
+    <a th:href="@{/new}" class='fas fa-plus-square' style='font-size:140%;color:green'> Create New Product</a>
     <br/><br/>
     <table border="1" cellpadding="10" align="right">
         <thead>
-        <tr>
+        <tr required>
             <th class="tabh">Product ID</th>
             <th class="tabh">Categories</th>
             <th class="tabh">product Name</th>
@@ -555,17 +557,18 @@ tr td:last-child {
         </thead>
         <tbody>
         <tr th:each="Groceries : ${lg}">
-            <td th:text="${Groceries.proid}">Product ID</td>
-            <td th:text="${Groceries.categories}">Categories</td>
-            <td th:text="${Groceries.proname}">product Name</td>
-            <td th:text="${Groceries.quantity}">Quantity</td>
-            <td th:text="${Groceries.price}">Price</td>
+            <td th:text="${Groceries.proid}"></td>
+            <td th:text="${Groceries.categories}"></td>
+            <td th:text="${Groceries.proname}"></td>
+            <td th:text="${Groceries.quantity}"></td>
+            <td th:text="${Groceries.price}"></td>
             <td>
-                <a  th:href="@{'/edit/' + ${Groceries.proid}}"><button type="button">Edit</button></a>
+                <a  th:href="@{'/edit/' + ${Groceries.proid}}"><button type="button" class='fas fa-edit' style='font-size:18px; color:blue;'>Edit</button></a>
                 &nbsp;&nbsp;&nbsp;
                 <a  th:href="@{'/delete/' + ${Groceries.proid}}" onclick="alert('delete a item!!!')">
-                    <button type="button">Delete</button> </a>
+                    <button type="button" class="fa fa-minus-circle" style="font-size:18px;color:red"> Delete</button> </a>
             </td>
+            
         </tr>
         </tbody>
     </table>
