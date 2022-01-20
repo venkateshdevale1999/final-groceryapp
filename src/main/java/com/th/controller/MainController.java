@@ -2,6 +2,7 @@ package com.th.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,6 +29,7 @@ import com.th.repository.UsersCartRepository;
 import com.th.repository.UsersRepository;
 import com.th.service.AdminService;
 import com.th.service.UserService;
+import com.th.service.UserServiceImpl;
 
 /**
  * 
@@ -119,9 +121,10 @@ public class MainController {
 	 */
 	@PostMapping(PropertyConstants.CHECK)
 	public String auth(@ModelAttribute("user") Users u, RedirectAttributes redirAttrs, Model model) {
-		emailid=u.getUseremail();
-		model.addAttribute("emailid",emailid);
-		String homepage = userservice.auth(u, redirAttrs);
+		
+		
+		
+		String homepage = userservice.auth(u, redirAttrs,model);
 		return homepage;
 
 	}
@@ -334,7 +337,8 @@ public class MainController {
 	 */
 	@RequestMapping(PropertyConstants.HOME_REDIRECT)
 	public String replayhome(Model model) {
-		model.addAttribute("emailid", emailid);
+		
+		model.addAttribute("username", UserServiceImpl.username);
 		return "home";
 		
 		

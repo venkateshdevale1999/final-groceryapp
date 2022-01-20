@@ -11,7 +11,7 @@ import com.th.model.Userscartitems1;
 
 public interface UserService {
 	
-	public String auth (@ModelAttribute("user") Users u, RedirectAttributes redirAttrs);
+	public String auth (@ModelAttribute("user") Users u, RedirectAttributes redirAttrs,Model model);
 	public String signUp();
 	public String Loginpage();
 	public String Indexpage();
@@ -25,5 +25,6 @@ public interface UserService {
 	public String finalPay(@PathVariable(name = "price") int price ,Model model,@PathVariable("address") String address);
 	public String saveProductnoimg(@ModelAttribute("grocery") Groceries grocery);
 	public String showMyorders(Model model);
+
 
 }

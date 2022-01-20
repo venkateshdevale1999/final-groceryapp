@@ -38,10 +38,16 @@ public class UserServiceImpl implements UserService{
 	MyOrderRepository mo;
 	
 	String emailid;
+	
+	public static String username;
 
 	@Override
-	public String auth(Users u, RedirectAttributes redirAttrs) {
+	public String auth(Users u, RedirectAttributes redirAttrs,Model model) {
 		Optional<Users> searchUser = ur.findById(u.getUseremail());
+		String name = searchUser.get().getUsername();
+		username = name;
+		model.addAttribute("username",name);
+		System.out.println(name);
 		if(searchUser.isPresent()) 
 		{
 			emailid=u.getUseremail();
@@ -206,6 +212,10 @@ public class UserServiceImpl implements UserService{
 	public String Indexpage() {
 		return "splash";
 	}
+	
+	
+	
+	
 
 	
 

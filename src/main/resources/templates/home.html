@@ -71,7 +71,7 @@ window.onclick = function(event) {
     <div class="header-1">
 
         <a href="#" class="logo"><i class="fas fa-shopping-basket"></i>grocery store</a>
-
+		 <h1 style="margin-left: 62%;">Welcome</h1><h1 th:text="${username}"></h1>
 
     </div>
 
@@ -89,9 +89,9 @@ window.onclick = function(event) {
         	
             <a href="#" th:href="@{'/cartShow'}" class="fas fa-shopping-cart"></a>
             <div class="dropdown">
-  <a onclick="myFunction()" id="dropbtn" class="fas fa-user-circle"></a>
+  <a onclick="myFunction()" id="dropbtn" class="fa fa-user-circle-o"></a>
   <div id="myDropdown" class="dropdown-content">
-    <a th:text="${emailid}"></a>
+    
     <a th:href="@{'/myorders'}">My Orders</a>
     <a th:href="@{/login}">Logout</a>
   </div>

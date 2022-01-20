@@ -10,22 +10,22 @@ import javax.persistence.Id;
 @Entity
 public class Users {
 	
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userid;
+	
+	private String username;
 	@Id
 	private String useremail;
 	private String password;
-	private long phoneno;
+	private String phoneno;
 	
 	
-	public int getUserid() {
-		return userid;
+	
+	
+	public String getUsername() {
+		return username;
 	}
-	public void setUserid(int userid) {
-		this.userid = userid;
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	
-	
 	public String getUseremail() {
 		return useremail;
 	}
@@ -38,10 +38,10 @@ public class Users {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public long getPhoneno() {
+	public String getPhoneno() {
 		return phoneno;
 	}
-	public void setPhoneno(long phoneno) {
+	public void setPhoneno(String phoneno) {
 		this.phoneno = phoneno;
 	}
 	
@@ -51,12 +51,12 @@ public class Users {
 	}
 	@Override
 	public String toString() {
-		return "Users [userid=" + userid + ", useremail=" + useremail + ", password=" + password + ", phoneno="
+		return "Users [userid=" + username + ", useremail=" + useremail + ", password=" + password + ", phoneno="
 				+ phoneno + "]";
 	}
-	public Users(int userid, String useremail, String password, int phoneno) {
+	public Users(String username, String useremail, String password, String phoneno) {
 		super();
-		this.userid = userid;
+		this.username = username;
 		this.useremail = useremail;
 		this.password = password;
 		this.phoneno = phoneno;
