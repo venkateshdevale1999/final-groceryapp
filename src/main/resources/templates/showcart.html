@@ -770,8 +770,21 @@ section{
 <div style="margin-left:788px; display:inline-block; font-size:130%; padding:6px;">
 <h3 style="display:inline-block;">total price: 
 <p th:text="${totalp}" style="display:inline-block;"></p>&nbsp;<span class="fas fa-rupee"></span></h3>
-<a th:href="@{'/payment/' + ${totalp}}" ><button id="buybtn" type="button" style="font-size:130%; margin-left:102px;"> Buy Now </button></a>
+<a id="an" th:href="@{'/payment/' + ${totalp}}" th:onclick="'javascript:checktp(' + ${totalp} + ');'" ><button id="buybtn" type="button" style="font-size:130%; margin-left:102px;" > Buy Now </button></a>
 </div>
+<script>
+function checktp(price){
+	
+var a="/homereplay"
+
+if(price==0){
+	alert("add item to cart!!");
+	document.getElementById("an").href=a;
+}
+}
+
+</script>
+
 </body>
 </html>
 
