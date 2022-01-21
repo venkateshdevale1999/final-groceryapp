@@ -42,25 +42,27 @@ public class UserServiceImpl implements UserService{
 	public static String username;
 
 	@Override
-	public String auth(Users u, RedirectAttributes redirAttrs,Model model) {
+	public String auth(Users u, RedirectAttributes redirAttrs, Model model) {
 		Optional<Users> searchUser = ur.findById(u.getUseremail());
-		String name = searchUser.get().getUsername();
-		username = name;
-		model.addAttribute("username",name);
-		System.out.println(name);
 		if(searchUser.isPresent()) 
 		{
 			emailid=u.getUseremail();
 			Users u1= searchUser.get();
-			if(u.getPassword().equals(u1.getPassword()))
+			if(u.getPassword().equals(u1.getPassword())) {
+				String name = searchUser.get().getUsername();
+				username = name;
+				model.addAttribute("username",name);
+				System.out.println(name);
 				return "home";
+			}
+				
 			 
-			redirAttrs.addFlashAttribute("error", "The");
+			redirAttrs.addFlashAttribute("error","");
 			return "redirect:/login";
 
 		}
 		else {
-			redirAttrs.addFlashAttribute("error1", "The");
+			redirAttrs.addFlashAttribute("error1","");
 			return "redirect:/login";
 		}
 

@@ -55,12 +55,12 @@ public class AdminServiceImpl implements AdminService {
 				
 			}
 			 
-			redirAttrs.addFlashAttribute("error", "The");
+			redirAttrs.addFlashAttribute("error", "");
 			return "redirect:/admin";
 
 		}
 		else {
-			redirAttrs.addFlashAttribute("error1", "The");
+			redirAttrs.addFlashAttribute("error1", "");
 			return "redirect:/admin";
 		}
 	}

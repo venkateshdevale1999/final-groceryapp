@@ -6,22 +6,20 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="logstyle.css">
     <link rel="icon" href="basket-shop.png"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
-<div class="alert alert-danger" role="alert" th:if="${error}">
-<script>
+
+<script th:if="${error}">
 swal.fire("Invalid Password","","error");
 </script>
-</div>
 
-<div class="alert alert-danger" role="alert" th:if="${error1}">
-<script>
+<script th:if="${error1}">
 swal.fire("Invalid Email Address","","error");
 </script>
-</div>
 
     <img class="wave" src="wave.png">
     <div class="container">
@@ -34,7 +32,7 @@ swal.fire("Invalid Email Address","","error");
             <h2 class="title">Welcome</h2>
             <div class="input-div one">
                 <div class="i">
-                    <i class="fas fa-user"></i>
+                    <i class="material-icons">email</i>
                 </div>
                 <div class="div">
 

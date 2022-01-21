@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Sign-Up</title>
+    <link rel="stylesheet" type="text/css" href="logstyle2.css">
     <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="logstyle.css">
     <script src="https://kit.fontawesome.com/a81368914c.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <link rel="icon" href="basket-shop.png"/>
 </head>
 <body>
@@ -32,9 +33,6 @@ Swal.fire({
 swal.fire("User already exist!","Try to login","warning");
 </script>
 </div>
-
-
-
     <img class="wave" src="wave.png">
     <div class="container">
         <div class="img">
@@ -56,7 +54,7 @@ swal.fire("User already exist!","Try to login","warning");
             </div>
             <div class="input-div one">
             <div class="i">
-                    <i class="fas fa-user"></i>
+                    <i class="material-icons">email</i>
                 </div>
                 <div class="div">
 
@@ -79,16 +77,13 @@ swal.fire("User already exist!","Try to login","warning");
                 </div>
                 <div class="div">
                     <h5>Phone No</h5>
-                    <input type="text" name="phoneno" class="input" required>
+                    <input type="number" name="phoneno" class="input" required>
                 </div>
                 
             </div>
             <input type="submit" class="btn" name="" value="SignUP" />
-<!--            <span>or</span>-->
 		<a th:href = "@{/login}">already have account?</a>
-            
         </form>
-        
     </div>
     </div>
     <script type="text/javascript" src="main.js"></script>

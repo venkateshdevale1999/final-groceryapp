@@ -44,7 +44,7 @@ xmlns:th="http://www.thymeleaf.org">
     
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 :root {
-    --main-color: radial-gradient(circle, #0077ea, #1f4f96, #1b2949, #000);;
+    --main-color: #1f8fc3;
     --color-dark: #1D2231;
     --text-grey: #8390A2;
 }
@@ -495,8 +495,8 @@ swal.fire({
     <div class="sidebar-menu">
         <ul>
             <li>
-                <a href="" class="active"><span class="fas fa-user-edit"></span>
-                    <span>Add and delete Products</span></a>
+                <a class="active"><span class="fas fa-user-edit"></span>
+                    <span>Add Products</span></a>
             </li>
             <li>
                 <a th:href = "@{/admin}"><span class="fa fa-sign-out"></span>
