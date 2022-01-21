@@ -199,7 +199,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public String saveProductnoimg(Groceries grocery) {
-		gr.save(grocery);
+		
+		gr.setQuanPrice(grocery.getQuantity(), grocery.getPrice(), grocery.getProid());
 		return "redirect:/adminlogin1";
 	}
 
