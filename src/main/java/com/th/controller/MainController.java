@@ -368,5 +368,11 @@ public class MainController {
 		return "userorders";
 	}
 	
+	
+    @RequestMapping("/aboutus")
+	public String aboutus() {
+		
+		return "aboutus";
+	}
 
 }
