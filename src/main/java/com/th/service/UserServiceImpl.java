@@ -97,7 +97,8 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public String addTocart(Model model, int proid, String procat, int qun, Groceries product, RedirectAttributes redirAttrs, String email) {
-		List<Userscartitems1> opt=uc.findByProid(proid, email);
+		List<Userscartitems1> opt=uc.findByProid(proid, emailid);
+		System.out.println(opt);
 		if(opt.isEmpty()) {
 			Userscartitems1 u=new Userscartitems1();
 			u.setQuantity(qun);

@@ -196,6 +196,7 @@ position: absolute;
     left:27px;
 }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </head>
 <body>
 <h1 class="price">Rs: <span th:text="${price}">/-</span></h1><br>
@@ -296,7 +297,13 @@ function fun(){
 var a=document.getElementById("address").value;
 var x = document.getElementById("an").href+a;
 document.getElementById("an").href=x;
-alert(x);
+swal.fire({
+	title:"payement processing",
+	icon:"success",
+	showConfirmButton:false,
+	toast: true,
+	timer: 2000
+})
 }
 document.querySelector('.card-number-input').oninput = () =>{
     document.querySelector('.card-number-box').innerText = document.querySelector('.card-number-input').value;
